@@ -1,0 +1,50 @@
+<h2 style="color: purple; text-align: center;">
+    Sample Data Pull for Household #<%= (householdId || '0000').padStart(4, '0') %>
+</h2>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>Hshd_num</th>
+        <th>Basket_num</th>
+        <th>Date</th>
+        <th>Product_num</th>
+        <th>Department</th>
+        <th>Commodity</th>
+        <th>Spend</th>
+        <th>Units</th>
+        <th>Store_region</th>
+        <th>Week_num</th>
+        <th>Year</th>
+        <th>Loyalty_flag</th>
+        <th>Age_range</th>
+        <th>Marital_status</th>
+        <th>Income_range</th>
+        <th>Homeowner_desc</th>
+        <th>Hshd_composition</th>
+        <th>Hshd_size</th>
+        <th>Children</th>
+    </tr>
+    <% data.forEach(row => { %>
+    <tr>
+        <td><%= row.hshd_num %></td>
+        <td><%= row.basket_num %></td>
+        <td><%= new Date(row.purchase_date).toLocaleDateString() %></td>
+        <td><%= row.product_num %></td>
+        <td><%= row.department %></td>
+        <td><%= row.commodity %></td>
+        <td><%= row.spend %></td>
+        <td><%= row.units %></td>
+        <td><%= row.store_region %></td>
+        <td><%= row.week_num %></td>
+        <td><%= row.year %></td>
+        <td><%= row.loyalty_flag %></td>
+        <td><%= row.age_range %></td>
+        <td><%= row.marital_status %></td>
+        <td><%= row.income_range %></td>
+        <td><%= row.homeowner %></td>
+        <td><%= row.hshd_composition %></td>
+        <td><%= row.hh_size %></td>
+        <td><%= row.children %></td>
+    </tr>
+    <% }) %>
+</table>

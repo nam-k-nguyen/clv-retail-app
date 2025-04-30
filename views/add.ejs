@@ -1,0 +1,41 @@
+<h2>Add Transaction</h2>
+<form method="POST" action="/add/transaction">
+    <input name="hshd_num" placeholder="HSHD_NUM" required />
+    <input name="basket_num" placeholder="BASKET_NUM" required />
+    <input name="purchase_date" type="date" required />
+    <input name="product_num" placeholder="PRODUCT_NUM" required />
+    <input name="spend" placeholder="SPEND" required />
+    <input name="units" placeholder="UNITS" required />
+    <input name="store_region" placeholder="STORE_REGION" required />
+    <input name="week_num" placeholder="WEEK_NUM" required />
+    <input name="year" placeholder="YEAR" required />
+    <button type="submit">Add Transaction</button>
+</form>
+
+<hr />
+
+<h2>Add Household</h2>
+<form method="POST" action="/add/household">
+    <input name="hshd_num" placeholder="HSHD_NUM" required />
+    <input name="loyalty_flag" placeholder="LOYALTY_FLAG" required />
+    <input name="age_range" placeholder="AGE_RANGE" required />
+    <input name="marital_status" placeholder="MARITAL_STATUS" required />
+    <input name="income_range" placeholder="INCOME_RANGE" required />
+    <input name="homeowner" placeholder="HOMEOWNER" required />
+    <input name="hshd_composition" placeholder="HSHD_COMPOSITION" required />
+    <input name="hh_size" placeholder="HH_SIZE" required />
+    <input name="children" placeholder="CHILDREN" required />
+    <button type="submit">Add Household</button>
+</form>
+
+<hr />
+
+<h2>Add Product</h2>
+<form method="POST" action="/add/product">
+    <input name="product_num" placeholder="PRODUCT_NUM" required />
+    <input name="department" placeholder="DEPARTMENT" required />
+    <input name="commodity" placeholder="COMMODITY" required />
+    <input name="brand_type" placeholder="BRAND_TYPE" required />
+    <input name="natural_organic_flag" placeholder="NATURAL_ORGANIC_FLAG" required />
+    <button type="submit">Add Product</button>
+</form>
