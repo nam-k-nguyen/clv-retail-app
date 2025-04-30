@@ -1,50 +1,96 @@
-<h2 style="color: purple; text-align: center;">
-    Sample Data Pull for Household #<%= (householdId || '0000').padStart(4, '0') %>
-</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<table border="1" cellpadding="6">
-    <tr>
-        <th>Hshd_num</th>
-        <th>Basket_num</th>
-        <th>Date</th>
-        <th>Product_num</th>
-        <th>Department</th>
-        <th>Commodity</th>
-        <th>Spend</th>
-        <th>Units</th>
-        <th>Store_region</th>
-        <th>Week_num</th>
-        <th>Year</th>
-        <th>Loyalty_flag</th>
-        <th>Age_range</th>
-        <th>Marital_status</th>
-        <th>Income_range</th>
-        <th>Homeowner_desc</th>
-        <th>Hshd_composition</th>
-        <th>Hshd_size</th>
-        <th>Children</th>
-    </tr>
-    <% data.forEach(row => { %>
-    <tr>
-        <td><%= row.hshd_num %></td>
-        <td><%= row.basket_num %></td>
-        <td><%= new Date(row.purchase_date).toLocaleDateString() %></td>
-        <td><%= row.product_num %></td>
-        <td><%= row.department %></td>
-        <td><%= row.commodity %></td>
-        <td><%= row.spend %></td>
-        <td><%= row.units %></td>
-        <td><%= row.store_region %></td>
-        <td><%= row.week_num %></td>
-        <td><%= row.year %></td>
-        <td><%= row.loyalty_flag %></td>
-        <td><%= row.age_range %></td>
-        <td><%= row.marital_status %></td>
-        <td><%= row.income_range %></td>
-        <td><%= row.homeowner %></td>
-        <td><%= row.hshd_composition %></td>
-        <td><%= row.hh_size %></td>
-        <td><%= row.children %></td>
-    </tr>
-    <% }) %>
-</table>
+<head>
+    <meta charset="UTF-8">
+    <title>Household Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        th,
+        td {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md mb-6">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-indigo-600">Retail Insights</h1>
+            <div class="space-x-4">
+                <a href="/home" class="text-gray-600 hover:text-indigo-600">Home</a>
+                <a href="/dashboard" class="text-gray-600 hover:text-indigo-600">Dashboard</a>
+                <a href="/add" class="text-gray-600 hover:text-indigo-600">Add Data</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-6">
+        <h2 class="text-2xl font-semibold text-purple-600 text-center mb-6">
+            Sample Data Pull for Household #<%= (householdId || '0000').padStart(4, '0') %>
+        </h2>
+
+        <div class="overflow-auto bg-white rounded-xl shadow-md">
+            <table class="min-w-full table-auto text-sm">
+                <thead class="bg-indigo-50 font-semibold text-gray-700">
+                    <tr>
+                        <th>Hshd</th>
+                        <th>Basket</th>
+                        <th>Date</th>
+                        <th>Product</th>
+                        <th>Dept</th>
+                        <th>Commodity</th>
+                        <th>Spend</th>
+                        <th>Units</th>
+                        <th>Region</th>
+                        <th>Week</th>
+                        <th>Year</th>
+                        <th>Loyalty</th>
+                        <th>Age</th>
+                        <th>Status</th>
+                        <th>Income</th>
+                        <th>Owner</th>
+                        <th>Composition</th>
+                        <th>Size</th>
+                        <th>Children</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <% data.forEach(row => { %>
+                    <tr class="hover:bg-gray-50">
+                        <td><%= row.hshd_num %></td>
+                        <td><%= row.basket_num %></td>
+                        <td><%= new Date(row.purchase_date).toLocaleDateString() %></td>
+                        <td><%= row.product_num %></td>
+                        <td><%= row.department %></td>
+                        <td><%= row.commodity %></td>
+                        <td><%= row.spend %></td>
+                        <td><%= row.units %></td>
+                        <td><%= row.store_region %></td>
+                        <td><%= row.week_num %></td>
+                        <td><%= row.year %></td>
+                        <td><%= row.loyalty_flag %></td>
+                        <td><%= row.age_range %></td>
+                        <td><%= row.marital_status %></td>
+                        <td><%= row.income_range %></td>
+                        <td><%= row.homeowner %></td>
+                        <td><%= row.hshd_composition %></td>
+                        <td><%= row.hh_size %></td>
+                        <td><%= row.children %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

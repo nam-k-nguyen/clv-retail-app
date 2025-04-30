@@ -1,15 +1,56 @@
-<h2>Register</h2>
-<form method="POST">
-    <input name="username" placeholder="Username" required /><br />
-    <input name="password" type="password" placeholder="Password" required /><br />
-    <input name="email" type="email" placeholder="Email" required /><br />
-    <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
 
-<h2>Search by Household Number</h2>
+<head>
+    <meta charset="UTF-8">
+    <title>Retail Insights - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
 
-<form action="/household" method="GET">
-    <label for="hshd">Enter Household Number:</label>
-    <input type="number" name="id" id="hshd" required />
-    <button type="submit">Search</button>
-</form>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md mb-6">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-indigo-600">Retail Insights</h1>
+            <div class="space-x-4">
+                <a href="/home" class="text-gray-600 hover:text-indigo-600">Home</a>
+                <a href="/dashboard" class="text-gray-600 hover:text-indigo-600">Dashboard</a>
+                <a href="/add" class="text-gray-600 hover:text-indigo-600">Add Data</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 grid gap-8 md:grid-cols-2">
+
+        <!-- Register Form -->
+        <div class="bg-white p-6 rounded-2xl shadow-md">
+            <h2 class="text-lg font-semibold mb-4">📝 Register</h2>
+            <form method="POST" class="space-y-4">
+                <input name="username" placeholder="Username" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <input name="password" type="password" placeholder="Password" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <input name="email" type="email" placeholder="Email" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700">Submit</button>
+            </form>
+        </div>
+
+        <!-- Search Form -->
+        <div class="bg-white p-6 rounded-2xl shadow-md">
+            <h2 class="text-lg font-semibold mb-4">🔍 Search by Household Number</h2>
+            <form action="/household" method="GET" class="space-y-4">
+                <label for="hshd" class="block text-sm font-medium text-gray-700">Enter Household Number:</label>
+                <input type="number" name="id" id="hshd" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700">Search</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>

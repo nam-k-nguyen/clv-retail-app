@@ -1,25 +1,193 @@
-<h2 style="text-align:center;">Retail Insights Dashboard</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<h3>🧺 Average Spend by Household Size</h3>
-<table border="1">
-  <tr><th>HH Size</th><th>Avg Spend ($)</th></tr>
-  <% spendBySize.forEach(r => { %>
-    <tr><td><%= r.hh_size %></td><td><%= r.avg_spend %></td></tr>
-  <% }) %>
-</table>
+<head>
+    <meta charset="UTF-8">
+    <title>Retail Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
-<h3>🏷️ Units Sold by Brand Type</h3>
-<table border="1">
-  <tr><th>Brand Type</th><th>Total Units</th></tr>
-  <% unitsByBrand.forEach(r => { %>
-    <tr><td><%= r.brand_type %></td><td><%= r.total_units %></td></tr>
-  <% }) %>
-</table>
+        th,
+        td {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+        }
 
-<h3>🎯 Loyalty Member vs Non-Member Spend</h3>
-<table border="1">
-  <tr><th>Loyalty Flag</th><th>Avg Spend ($)</th></tr>
-  <% loyaltySpend.forEach(r => { %>
-    <tr><td><%= r.loyalty_flag %></td><td><%= r.avg_spend %></td></tr>
-  <% }) %>
-</table>
+        table {
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+    <nav class="bg-white shadow-md mb-6">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-indigo-600">Retail Insights</h1>
+            <div class="space-x-4">
+                <a href="/home" class="text-gray-600 hover:text-indigo-600">Home</a>
+                <a href="/dashboard" class="text-gray-600 hover:text-indigo-600">Dashboard</a>
+                <a href="/add" class="text-gray-600 hover:text-indigo-600">Add Data</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-semibold text-purple-600 text-center mb-6">
+            Dashboard
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Average Spend by Household Size -->
+            <div class="bg-white p-6 rounded-2xl shadow-md">
+                <h2 class="text-lg font-semibold mb-4">🧺 Avg Spend by Household Size</h2>
+                <canvas id="spendBySizeChart"></canvas>
+            </div>
+
+            <!-- Units Sold by Brand Type -->
+            <div class="bg-white p-6 rounded-2xl shadow-md">
+                <h2 class="text-lg font-semibold mb-4">🏷️ Units Sold by Brand Type</h2>
+                <canvas id="unitsByBrandChart"></canvas>
+            </div>
+
+            <!-- Loyalty Spend -->
+            <div class="bg-white p-6 rounded-2xl shadow-md">
+                <h2 class="text-lg font-semibold mb-4">🎯 Loyalty Spend</h2>
+                <canvas id="loyaltySpendChart"></canvas>
+            </div>
+
+            <!-- Cross-Sell Predictors -->
+            <div class="bg-white p-6 rounded-2xl shadow-md">
+                <h2 class="text-lg font-semibold mb-4">🧠 Cross-Sell Predictors (Top 10)</h2>
+                <canvas id="crossSellChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Churn Prediction Feature Importance -->
+        <div class="bg-white p-6 rounded-2xl shadow-md mt-10">
+            <h2 class="text-lg font-semibold mb-4">📉 Churn Feature Importance</h2>
+            <canvas id="churnChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Chart: Avg Spend by Household Size
+        const spendLabels = <%- JSON.stringify(spendBySize.map(r => r.hh_size)) %>;
+        const spendData = <%- JSON.stringify(spendBySize.map(r => r.avg_spend)) %>;
+        new Chart(document.getElementById('spendBySizeChart'), {
+            type: 'bar',
+            data: {
+                labels: spendLabels,
+                datasets: [{
+                    label: 'Avg Spend ($)',
+                    data: spendData,
+                    backgroundColor: '#6366f1'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Chart: Units Sold by Brand Type
+        const brandLabels = <%- JSON.stringify(unitsByBrand.map(r => r.brand_type)) %>;
+        const brandData = <%- JSON.stringify(unitsByBrand.map(r => r.total_units)) %>;
+        new Chart(document.getElementById('unitsByBrandChart'), {
+            type: 'pie',
+            data: {
+                labels: brandLabels,
+                datasets: [{
+                    data: brandData,
+                    backgroundColor: ['#10b981', '#f59e0b']
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Chart: Loyalty Spend
+        const loyaltyLabels = <%- JSON.stringify(loyaltySpend.map(r => r.loyalty_flag)) %>;
+        const loyaltyData = <%- JSON.stringify(loyaltySpend.map(r => r.avg_spend)) %>;
+        new Chart(document.getElementById('loyaltySpendChart'), {
+            type: 'bar',
+            data: {
+                labels: loyaltyLabels,
+                datasets: [{
+                    label: 'Avg Spend ($)',
+                    data: loyaltyData,
+                    backgroundColor: '#3b82f6'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Chart: Cross-Sell Predictors
+        const crossSellLabels = <%- JSON.stringify(crossSell.map(r => r.product_num)) %>;
+        const crossSellData = <%- JSON.stringify(crossSell.map(r => r.score.toFixed(5))) %>;
+        new Chart(document.getElementById('crossSellChart'), {
+            type: 'bar',
+            data: {
+                labels: crossSellLabels,
+                datasets: [{
+                    label: 'Importance',
+                    data: crossSellData,
+                    backgroundColor: '#f87171'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                indexAxis: 'y'
+            }
+        });
+
+        // Chart: Churn Feature Importance
+        const churnLabels = <%- JSON.stringify(churnFeatures.map(r => r.feature)) %>;
+        const churnData = <%- JSON.stringify(churnFeatures.map(r => r.importance.toFixed(5))) %>;
+        new Chart(document.getElementById('churnChart'), {
+            type: 'bar',
+            data: {
+                labels: churnLabels,
+                datasets: [{
+                    label: 'Importance',
+                    data: churnData,
+                    backgroundColor: '#f472b6'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                indexAxis: 'y'
+            }
+        });
+    </script>
+</body>
+
+</html>

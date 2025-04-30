@@ -1,6 +1,9 @@
 const express = require('express');
 const mysql = require('mysql2');
+
+const fs = require('fs');
 const path = require('path');
+const csv = require('csv-parser');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -100,17 +103,58 @@ app.get('/dashboard', async (req, res) => {
       GROUP BY h.loyalty_flag
     `);
 
-    res.render('dashboard', {
-      spendBySize,
-      unitsByBrand,
-      loyaltySpend
-    });
+    const crossSell = [];
+    const churnFeatures = [];
+
+    const loadCSV = (filePath, onRow, onComplete) => {
+      fs.createReadStream(filePath)
+        .pipe(csv())
+        .on('data', onRow)
+        .on('end', onComplete);
+    };
+
+    // Load both CSV files in parallel then render after both are done
+    let csvsLoaded = 0;
+    const tryRender = () => {
+      csvsLoaded++;
+      if (csvsLoaded === 2) {
+        res.render('dashboard', {
+          spendBySize,
+          unitsByBrand,
+          loyaltySpend,
+          crossSell,
+          churnFeatures
+        });
+      }
+    };
+
+    loadCSV(
+      path.join(__dirname, 'data/top_cross_sell_predictors.csv'),
+      row => {
+        crossSell.push({
+          product_num: row['product_num'],
+          score: parseFloat(row['0']) || parseFloat(row['score'])
+        });
+      },
+      tryRender
+    );
+
+    loadCSV(
+      path.join(__dirname, 'data/churn_prediction.csv'),
+      row => {
+        churnFeatures.push({
+          feature: row['feature'],
+          importance: parseFloat(row['importance'])
+        });
+      },
+      tryRender
+    );
+
   } catch (err) {
     console.error(err);
     res.status(500).send('Dashboard error');
   }
 });
-
 
 
 app.post('/add/transaction', (req, res) => {

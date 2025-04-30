@@ -1,41 +1,79 @@
-<h2>Add Transaction</h2>
-<form method="POST" action="/add/transaction">
-    <input name="hshd_num" placeholder="HSHD_NUM" required />
-    <input name="basket_num" placeholder="BASKET_NUM" required />
-    <input name="purchase_date" type="date" required />
-    <input name="product_num" placeholder="PRODUCT_NUM" required />
-    <input name="spend" placeholder="SPEND" required />
-    <input name="units" placeholder="UNITS" required />
-    <input name="store_region" placeholder="STORE_REGION" required />
-    <input name="week_num" placeholder="WEEK_NUM" required />
-    <input name="year" placeholder="YEAR" required />
-    <button type="submit">Add Transaction</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
 
-<hr />
+<head>
+    <meta charset="UTF-8">
+    <title>Add Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
-<h2>Add Household</h2>
-<form method="POST" action="/add/household">
-    <input name="hshd_num" placeholder="HSHD_NUM" required />
-    <input name="loyalty_flag" placeholder="LOYALTY_FLAG" required />
-    <input name="age_range" placeholder="AGE_RANGE" required />
-    <input name="marital_status" placeholder="MARITAL_STATUS" required />
-    <input name="income_range" placeholder="INCOME_RANGE" required />
-    <input name="homeowner" placeholder="HOMEOWNER" required />
-    <input name="hshd_composition" placeholder="HSHD_COMPOSITION" required />
-    <input name="hh_size" placeholder="HH_SIZE" required />
-    <input name="children" placeholder="CHILDREN" required />
-    <button type="submit">Add Household</button>
-</form>
+        input,
+        button {
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
 
-<hr />
+<body class="bg-gray-100 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md mb-6">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-indigo-600">Retail Insights</h1>
+            <div class="space-x-4">
+                <a href="/home" class="text-gray-600 hover:text-indigo-600">Home</a>
+                <a href="/dashboard" class="text-gray-600 hover:text-indigo-600">Dashboard</a>
+                <a href="/add" class="text-gray-600 hover:text-indigo-600">Add Data</a>
+            </div>
+        </div>
+    </nav>
 
-<h2>Add Product</h2>
-<form method="POST" action="/add/product">
-    <input name="product_num" placeholder="PRODUCT_NUM" required />
-    <input name="department" placeholder="DEPARTMENT" required />
-    <input name="commodity" placeholder="COMMODITY" required />
-    <input name="brand_type" placeholder="BRAND_TYPE" required />
-    <input name="natural_organic_flag" placeholder="NATURAL_ORGANIC_FLAG" required />
-    <button type="submit">Add Product</button>
-</form>
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md">
+        <h2 class="text-2xl font-bold text-indigo-700 mb-6">➕ Add Transaction</h2>
+        <form method="POST" action="/add/transaction" class="grid grid-cols-1 gap-4">
+            <input name="hshd_num" placeholder="HSHD_NUM" required class="p-2 border rounded" />
+            <input name="basket_num" placeholder="BASKET_NUM" required class="p-2 border rounded" />
+            <input name="purchase_date" type="date" required class="p-2 border rounded" />
+            <input name="product_num" placeholder="PRODUCT_NUM" required class="p-2 border rounded" />
+            <input name="spend" placeholder="SPEND" required class="p-2 border rounded" />
+            <input name="units" placeholder="UNITS" required class="p-2 border rounded" />
+            <input name="store_region" placeholder="STORE_REGION" required class="p-2 border rounded" />
+            <input name="week_num" placeholder="WEEK_NUM" required class="p-2 border rounded" />
+            <input name="year" placeholder="YEAR" required class="p-2 border rounded" />
+            <button type="submit" class="bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">Add Transaction</button>
+        </form>
+
+        <hr class="my-8" />
+
+        <h2 class="text-2xl font-bold text-indigo-700 mb-6">👨‍👩‍👧 Add Household</h2>
+        <form method="POST" action="/add/household" class="grid grid-cols-1 gap-4">
+            <input name="hshd_num" placeholder="HSHD_NUM" required class="p-2 border rounded" />
+            <input name="loyalty_flag" placeholder="LOYALTY_FLAG" required class="p-2 border rounded" />
+            <input name="age_range" placeholder="AGE_RANGE" required class="p-2 border rounded" />
+            <input name="marital_status" placeholder="MARITAL_STATUS" required class="p-2 border rounded" />
+            <input name="income_range" placeholder="INCOME_RANGE" required class="p-2 border rounded" />
+            <input name="homeowner" placeholder="HOMEOWNER" required class="p-2 border rounded" />
+            <input name="hshd_composition" placeholder="HSHD_COMPOSITION" required class="p-2 border rounded" />
+            <input name="hh_size" placeholder="HH_SIZE" required class="p-2 border rounded" />
+            <input name="children" placeholder="CHILDREN" required class="p-2 border rounded" />
+            <button type="submit" class="bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">Add Household</button>
+        </form>
+
+        <hr class="my-8" />
+
+        <h2 class="text-2xl font-bold text-indigo-700 mb-6">📦 Add Product</h2>
+        <form method="POST" action="/add/product" class="grid grid-cols-1 gap-4">
+            <input name="product_num" placeholder="PRODUCT_NUM" required class="p-2 border rounded" />
+            <input name="department" placeholder="DEPARTMENT" required class="p-2 border rounded" />
+            <input name="commodity" placeholder="COMMODITY" required class="p-2 border rounded" />
+            <input name="brand_type" placeholder="BRAND_TYPE" required class="p-2 border rounded" />
+            <input name="natural_organic_flag" placeholder="NATURAL_ORGANIC_FLAG" required class="p-2 border rounded" />
+            <button type="submit" class="bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">Add Product</button>
+        </form>
+    </div>
+</body>
+
+</html>
