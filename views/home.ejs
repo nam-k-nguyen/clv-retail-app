@@ -19,7 +19,7 @@
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-indigo-600">Retail Insights</h1>
             <div class="space-x-4">
-                <a href="/home" class="text-gray-600 hover:text-indigo-600">Home</a>
+                <a href="/" class="text-gray-600 hover:text-indigo-600">Home</a>
                 <a href="/dashboard" class="text-gray-600 hover:text-indigo-600">Dashboard</a>
                 <a href="/add" class="text-gray-600 hover:text-indigo-600">Add Data</a>
             </div>
@@ -45,12 +45,20 @@
             <h2 class="text-lg font-semibold mb-4">🔍 Search by Household Number</h2>
             <form action="/household" method="GET" class="space-y-4">
                 <label for="hshd" class="block text-sm font-medium text-gray-700">Enter Household Number:</label>
-                <input type="number" name="id" id="hshd" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                <input type="number" name="id" id="hshd" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="try 1, 10, or 29"/>
                 <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700">Search</button>
             </form>
         </div>
 
     </div>
 </body>
+
+<script>
+    // on regsiter form submit, do nothing
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        alert('Registration form submitted! This feature is not fully implemented yet.'); // Show an alert or handle the form submission as needed
+    });
+</script>
 
 </html>
